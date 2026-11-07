@@ -23,10 +23,26 @@
   --ochre:      #a97b1f;
   --indigo:     #2b4b7d;
 
-  --serif: "Songti SC", "Source Han Serif SC", "Noto Serif SC", "STSong", Georgia, "Times New Roman", serif;
-  --latin: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
-  --sans: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", ui-monospace, monospace;
+  /* bundled traditional-Chinese webfonts (subsetted Noto Serif/Sans TC, variable weight)
+     guarantee identical weight & glyph style everywhere — online, offline and on canvas */
+  --serif: "Songti SC", "Source Han Serif SC", "Noto Serif SC", "STSong", Georgia, "Atlas Serif TC", "Times New Roman", serif;
+  --latin: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Atlas Serif TC", serif;
+  --sans: "Segoe UI", -apple-system, BlinkMacSystemFont, "Atlas Sans TC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", "Atlas Sans TC", ui-monospace, monospace;
+}
+
+@font-face {
+  font-family: "Atlas Serif TC";
+  src: url("../fonts/SerifTC-sub.woff2?v=5") format("woff2-variations");
+  font-weight: 200 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atlas Sans TC";
+  src: url("../fonts/SansTC-sub.woff2?v=5") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
 
   --shadow-sm: 0 1px 2px rgba(23, 22, 26, .05), 0 2px 8px rgba(23, 22, 26, .04);
   --shadow-md: 0 2px 4px rgba(23, 22, 26, .04), 0 12px 32px -12px rgba(23, 22, 26, .18);

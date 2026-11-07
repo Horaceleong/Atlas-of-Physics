@@ -150,8 +150,7 @@
         <section class="hero">
           <div>
             <div class="kicker">離線 · 中英對照 · ${P.chapters.length} 章</div>
-            <h1>把物理<br>畫成<em>可以轉動</em>的圖</h1>
-            <div class="sub">An offline, bilingual atlas of physics — from a falling ball to an induced current.</div>
+            <h1>把物理<br>畫成可以轉動的圖</h1>            <div class="sub">An offline, bilingual atlas of physics — from a falling ball to an induced current.</div>
           </div>
           <div class="hero-side">
             <p>左邊是中文與英文並排的課文，右邊是可以拖動、縮放的立體圖。每個知識點配一張圖，每張圖都能改參數、看讀數。</p>

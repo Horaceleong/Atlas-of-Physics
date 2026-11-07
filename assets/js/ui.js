@@ -64,7 +64,7 @@
   D.text = function (ctx, s, x, y, color, size, align, baseline, font) {
     ctx.save();
     ctx.fillStyle = color || PHYS.C.ink;
-    ctx.font = (size || 11) + 'px ' + (font || '"JetBrains Mono", Consolas, monospace');
+    ctx.font = (size || 11) + 'px ' + (font || '"JetBrains Mono", Consolas, "Atlas Sans TC", monospace');
     ctx.textAlign = align || 'left';
     ctx.textBaseline = baseline || 'middle';
     ctx.fillText(s, x, y);
