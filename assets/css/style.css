@@ -24,8 +24,10 @@
   --indigo:     #2b4b7d;
 
   /* bundled traditional-Chinese webfonts (subsetted Noto Serif/Sans TC, variable weight)
-     guarantee identical weight & glyph style everywhere — online, offline and on canvas */
-  --serif: "Songti SC", "Source Han Serif SC", "Noto Serif SC", "STSong", Georgia, "Atlas Serif TC", "Times New Roman", serif;
+     guarantee identical weight & glyph style everywhere — online, offline and on canvas.
+     they sit AHEAD of platform CJK fonts on purpose: local fonts like STSong/MingLiU
+     would otherwise hijack part of the text and mix weights within one block */
+  --serif: Georgia, "Atlas Serif TC", "Songti SC", "Source Han Serif SC", "Noto Serif SC", "STSong", "Times New Roman", serif;
   --latin: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Atlas Serif TC", serif;
   --sans: "Segoe UI", -apple-system, BlinkMacSystemFont, "Atlas Sans TC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
   --mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", "Atlas Sans TC", ui-monospace, monospace;
