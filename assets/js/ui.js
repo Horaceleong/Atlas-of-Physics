@@ -89,6 +89,10 @@
     const stage = document.createElement('div');
     stage.className = 'fig-stage';
     const canvas = document.createElement('canvas');
+    canvas.setAttribute('role', 'img');
+    canvas.setAttribute('aria-label', opts.label || '互动物理图 · interactive physics figure');
+    canvas.textContent = opts.label || '互动物理图';
+    if (opts.interactive !== false) canvas.setAttribute('tabindex', '-1');
     const badge = document.createElement('div');
     badge.className = 'fig-badge';
     if (opts.badge) badge.textContent = opts.badge;
@@ -113,7 +117,7 @@
       ctx: canvas.getContext('2d'),
       W: 600, H: 400, dpr: 1,
       aspect: opts.aspect || 0.66,
-      ticks: [], alive: true
+      ticks: [], alive: true, paused: false
     };
 
     function resize() {
@@ -180,6 +184,13 @@
     let last = performance.now(), t0 = last;
     function loop(now) {
       if (!host.alive) return;
+      // pause the simulation clock while off-screen or in a background tab:
+      // shifting t0 instead of dt keeps wave phases continuous on return.
+      if (host.paused || document.hidden) {
+        t0 += now - last; last = now;
+        host.raf = requestAnimationFrame(loop);
+        return;
+      }
       const dt = Math.min(.05, (now - last) / 1000); last = now;
       const t = (now - t0) / 1000;
       const ctx = host.ctx;
@@ -195,6 +206,7 @@
       host.alive = false;
       cancelAnimationFrame(host.raf);
       if (host.ro) host.ro.disconnect();
+      if (host.io) host.io.disconnect();
       el.innerHTML = '';
     };
 
@@ -204,6 +216,12 @@
       host.ro.observe(stage);
     } else {
       window.addEventListener('resize', resize);
+    }
+    if (window.IntersectionObserver) {
+      host.io = new IntersectionObserver(entries => {
+        for (const e of entries) host.paused = !e.isIntersecting;
+      }, { rootMargin: '120px' });
+      host.io.observe(stage);
     }
 
     requestAnimationFrame(t => { last = t; host.raf = requestAnimationFrame(loop); });
