@@ -24,9 +24,12 @@ An offline, zero-dependency bilingual (zh/en) physics teaching platform for juni
 python -m http.server 8137
 ```
 
+若浏览器缓存了旧版，请强制刷新（Ctrl+F5）；资源 URL 已带版本号，正常情况下无需手动清缓存。
+
 ## 功能
 
 - **学习地图**：每学段一张 SVG 依赖图，箭头 = 建议先学；悬停高亮前置与后续章节；节点即链接，键盘可达。
+- **3D 引擎**：三维模拟由本地打包的 **Three.js r147**（WebGL）渲染——半球光 + 平行光、ACES 色调映射、柔和阴影、网格地面、OrbitControls 拖动旋转 / 滚轮缩放 / 右键平移；所有资源本地化，file:// 直开仍然完全离线。
 - **语言**：中 / 中英 / EN 三态（默认中英对照；EN 模式下英文升级为大标题排版）。
 - **搜索**：Ctrl/⌘ K 或 `/` 呼出，可搜章节、知识点、术语，回车直达并滚动定位。
 - **目录抽屉**：全站章节 + 本篇小节锚点。

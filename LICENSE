@@ -5,8 +5,15 @@ Copyright (c) 2026 Nathan Liow — upstream "Atlas of Physics"
 chapter scaffolding conventions this project builds upon.
 
 Copyright (c) 2026 Horace Leong — Chinese & English course writing, the
-junior-secondary track, all interactive figures (2D/3D engines), the
-learning map, search palette and platform code.
+junior-secondary track, all interactive figures (2D canvas engines and the
+Three.js scene compositions in assets/vendor usage), the learning map,
+search palette and platform code.
+
+Bundled third-party library: Three.js r147 (build + OrbitControls addon),
+Copyright (c) 2010-2022 Three.js Authors, MIT License — see
+assets/vendor/three.min.js and assets/vendor/OrbitControls.js for the
+license headers. The library is vendored verbatim so the site stays fully
+offline (file://).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

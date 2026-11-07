@@ -326,10 +326,15 @@
     const spec = c.sims[i];
     const factory = P.sims[spec.type];
     if (!factory) { hostEl.innerHTML = '<p class="loading">图表未载入 · figure unavailable</p>'; return; }
-    const host = P.SimHost(hostEl, {
-      aspect: 0.70,
+    const is3d = !!P.SIMS_3D[spec.type];
+    if (is3d && !window.THREE) {
+      hostEl.innerHTML = '<p class="loading">三维引擎未载入 · 3D engine unavailable</p>';
+      return;
+    }
+    const host = P[is3d ? 'SimHostGL' : 'SimHost'](hostEl, {
+      aspect: is3d ? 0.72 : 0.70,
       badge: (i + 1) + ' / ' + c.sims.length,
-      label: '互动图：' + spec.label.zh + ' / ' + spec.label.en + '（' + c.title.zh + '）'
+      label: (is3d ? '立体互动图：' : '互动图：') + spec.label.zh + ' / ' + spec.label.en + '（' + c.title.zh + '）'
     });
     let api = null;
     try { api = factory(host, spec.cfg || {}); } catch (err) { console.error('[sim]', spec.type, err); }
