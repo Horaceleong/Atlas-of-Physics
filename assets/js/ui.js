@@ -90,8 +90,8 @@
     stage.className = 'fig-stage';
     const canvas = document.createElement('canvas');
     canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', opts.label || '互动物理图 · interactive physics figure');
-    canvas.textContent = opts.label || '互动物理图';
+    canvas.setAttribute('aria-label', opts.label || '互動物理圖 · interactive physics figure');
+    canvas.textContent = opts.label || '互動物理圖';
     if (opts.interactive !== false) canvas.setAttribute('tabindex', '-1');
     const badge = document.createElement('div');
     badge.className = 'fig-badge';

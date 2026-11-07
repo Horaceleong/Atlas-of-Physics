@@ -37,7 +37,7 @@
     }
 
     const v0 = host.addSlider({ label: '初速度 v₀', en: 'v0', min: 4, max: 26, step: .5, value: 14, unit: 'm/s', dp: 1, oninput: () => { t = 0; hold = 0; reframe(); } });
-    const ang = host.addSlider({ label: '抛射角 θ', en: 'angle', min: 10, max: 80, step: 1, value: 45, unit: '°', dp: 0, oninput: () => { t = 0; hold = 0; reframe(); } });
+    const ang = host.addSlider({ label: '拋射角 θ', en: 'angle', min: 10, max: 80, step: 1, value: 45, unit: '°', dp: 0, oninput: () => { t = 0; hold = 0; reframe(); } });
     let slow = !(cfg && cfg.slow === false);
     host.addToggle('慢放 ½', slow, v => slow = v);
     reframe();
@@ -97,9 +97,9 @@
   /* ============================================================== incline */
   PHYS.defineSim3D('incline', function (host) {
     const T = window.THREE;
-    const th = host.addSlider({ label: '倾角 θ', en: 'angle', min: 5, max: 45, step: 1, value: 25, unit: '°', dp: 0 });
-    const mu = host.addSlider({ label: '动摩擦因数 μ', en: 'friction', min: 0, max: .8, step: .02, value: .25, dp: 2 });
-    const mm = host.addSlider({ label: '质量 m', en: 'mass', min: 1, max: 8, step: .5, value: 3, unit: 'kg', dp: 1 });
+    const th = host.addSlider({ label: '傾角 θ', en: 'angle', min: 5, max: 45, step: 1, value: 25, unit: '°', dp: 0 });
+    const mu = host.addSlider({ label: '動摩擦因數 μ', en: 'friction', min: 0, max: .8, step: .02, value: .25, dp: 2 });
+    const mm = host.addSlider({ label: '質量 m', en: 'mass', min: 1, max: 8, step: .5, value: 3, unit: 'kg', dp: 1 });
     let showComp = false;
     host.addToggle('分解重力', false, v => showComp = v);
     const g = 9.8;
@@ -178,7 +178,7 @@
         { k: '支持力 N', v: fmt(N, 1), unit: 'N' },
         { k: '摩擦力 f', v: fmt(f, 1), unit: 'N' },
         { k: '加速度 a', v: fmt(acc, 2), unit: 'm/s²' },
-        { k: '状态', v: moving ? '下滑' : '静止' }
+        { k: '狀態', v: moving ? '下滑' : '靜止' }
       ]);
     });
     const prevDestroy = host.destroy.bind(host);
@@ -193,8 +193,8 @@
   /* ============================================================= elevator */
   PHYS.defineSim3D('elevator', function (host) {
     const T = window.THREE;
-    const acc = host.addSlider({ label: '电梯加速度 a', en: 'acceleration', min: -6, max: 6, step: .5, value: 2, unit: 'm/s²', dp: 1 });
-    const mm = host.addSlider({ label: '人的质量 m', en: 'mass', min: 30, max: 100, step: 5, value: 60, unit: 'kg', dp: 0 });
+    const acc = host.addSlider({ label: '電梯加速度 a', en: 'acceleration', min: -6, max: 6, step: .5, value: 2, unit: 'm/s²', dp: 1 });
+    const mm = host.addSlider({ label: '人的質量 m', en: 'mass', min: 30, max: 100, step: 5, value: 60, unit: 'kg', dp: 0 });
     const g = 9.8;
     host.setCam({ az: .48, el: .12, dist: 10.5, fov: 42, target: [0, 1.6, 0] });
 
@@ -244,10 +244,10 @@
       D.text(ctx, state, W - 14, 18, a > .2 ? C().red : a < -.2 ? C().indigo : C().teal, 13, 'right');
 
       host.setReadout([
-        { k: '体重 mg', v: fmt(mg, 0), unit: 'N' },
+        { k: '體重 mg', v: fmt(mg, 0), unit: 'N' },
         { k: '支持力 N', v: fmt(N, 0), unit: 'N' },
-        { k: '视重/实重', v: fmt(N / mg, 2) },
-        { k: '状态', v: state }
+        { k: '視重/實重', v: fmt(N / mg, 2) },
+        { k: '狀態', v: state }
       ]);
     });
     const prevDestroy = host.destroy.bind(host);
@@ -261,7 +261,7 @@
 
   /* ================================================================ orbit */
   PHYS.defineSim3D('orbit', function (host) {
-    const RR = host.addSlider({ label: '轨道半径', en: 'radius', min: 1.15, max: 5, step: .05, value: 1.6, unit: 'R⊕', dp: 2 });
+    const RR = host.addSlider({ label: '軌道半徑', en: 'radius', min: 1.15, max: 5, step: .05, value: 1.6, unit: 'R⊕', dp: 2 });
     host.setCam({ az: .6, el: .42, dist: 8.4, fov: 38, target: [0, 0, 0] });
     const GM = 3.986e14, RE = 6.371e6;
     let phase = 0;
@@ -293,9 +293,9 @@
       G.text([px * .7, 0, pz * .7], 'F', { dx: 4, dy: 10, size: 9.5, color: C().red });
 
       host.setReadout([
-        { k: '轨道半径', v: fmt(r / 1000, 0), unit: 'km' },
-        { k: '线速度', v: fmt(v / 1000, 2), unit: 'km/s' },
-        { k: '周期', v: fmt(T / 3600, 2), unit: 'h' },
+        { k: '軌道半徑', v: fmt(r / 1000, 0), unit: 'km' },
+        { k: '線速度', v: fmt(v / 1000, 2), unit: 'km/s' },
+        { k: '週期', v: fmt(T / 3600, 2), unit: 'h' },
         { k: '向心加速度', v: fmt(GM / (r * r), 2), unit: 'm/s²' }
       ]);
     });
@@ -304,8 +304,8 @@
 
   /* ============================================================= pendulum */
   PHYS.defineSim3D('pendulum', function (host) {
-      const LL = host.addSlider({ label: '摆长 L', en: 'length', min: 1, max: 4, step: .1, value: 2, unit: 'm', dp: 1, oninput: () => { th = .5; w = 0; trail.length = 0; } });
-    const th0 = host.addSlider({ label: '初始摆角', en: 'amplitude', min: 5, max: 40, step: 1, value: 20, unit: '°', dp: 0, oninput: v => { th = v * Math.PI / 180; w = 0; trail.length = 0; } });
+      const LL = host.addSlider({ label: '擺長 L', en: 'length', min: 1, max: 4, step: .1, value: 2, unit: 'm', dp: 1, oninput: () => { th = .5; w = 0; trail.length = 0; } });
+    const th0 = host.addSlider({ label: '初始擺角', en: 'amplitude', min: 5, max: 40, step: 1, value: 20, unit: '°', dp: 0, oninput: v => { th = v * Math.PI / 180; w = 0; trail.length = 0; } });
     const g = 9.8;
     let th = 20 * Math.PI / 180, w = 0;
     const trail = [];
@@ -343,10 +343,10 @@
       energyBars(ctx, 14, H - 54, 46, 7, [['E_k', KE, C().red], ['E_p', PE, C().teal]], Etot);
 
       host.setReadout([
-        { k: '周期 T', v: fmt(TAU * Math.sqrt(L / g), 2), unit: 's' },
-        { k: '当前摆角', v: fmt(th * 180 / Math.PI, 1), unit: '°' },
+        { k: '週期 T', v: fmt(TAU * Math.sqrt(L / g), 2), unit: 's' },
+        { k: '當前擺角', v: fmt(th * 180 / Math.PI, 1), unit: '°' },
         { k: '速度 v', v: fmt(v, 2), unit: 'm/s' },
-        { k: '机械能', v: fmt(KE + PE, 2), unit: 'J' }
+        { k: '機械能', v: fmt(KE + PE, 2), unit: 'J' }
       ]);
     });
     return {};
@@ -354,8 +354,8 @@
 
   /* =============================================================== spring */
   PHYS.defineSim3D('spring', function (host) {
-    const kk = host.addSlider({ label: '劲度系数 k', en: 'stiffness', min: 10, max: 120, step: 5, value: 40, unit: 'N/m', dp: 0 });
-    const mm = host.addSlider({ label: '质量 m', en: 'mass', min: .5, max: 3, step: .1, value: 1, unit: 'kg', dp: 1 });
+    const kk = host.addSlider({ label: '勁度係數 k', en: 'stiffness', min: 10, max: 120, step: 5, value: 40, unit: 'N/m', dp: 0 });
+    const mm = host.addSlider({ label: '質量 m', en: 'mass', min: .5, max: 3, step: .1, value: 1, unit: 'kg', dp: 1 });
     const g = 9.8;
     let phase = 0;
     host.setCam({ az: .42, el: .08, dist: 7.2, fov: 42, target: [0, 2.1, 0] });
@@ -395,10 +395,10 @@
       energyBars(ctx, 14, H - 54, 46, 7, [['E_k', KE, C().red], ['E_p', PE, C().teal]], E);
 
       host.setReadout([
-        { k: '周期 T', v: fmt(TAU * Math.sqrt(m / k), 2), unit: 's' },
+        { k: '週期 T', v: fmt(TAU * Math.sqrt(m / k), 2), unit: 's' },
         { k: '位移 x', v: fmt(x, 2), unit: 'm' },
         { k: '速度 v', v: fmt(v, 2), unit: 'm/s' },
-        { k: '角频率 ω', v: fmt(w0, 2), unit: 'rad/s' }
+        { k: '角頻率 ω', v: fmt(w0, 2), unit: 'rad/s' }
       ]);
     });
     return {};
@@ -406,12 +406,12 @@
 
   /* ============================================================ collision */
   PHYS.defineSim3D('collision', function (host) {
-    const m1s = host.addSlider({ label: 'A 质量', en: 'm1', min: .5, max: 5, step: .5, value: 2, unit: 'kg', dp: 1, oninput: reset });
+    const m1s = host.addSlider({ label: 'A 質量', en: 'm1', min: .5, max: 5, step: .5, value: 2, unit: 'kg', dp: 1, oninput: reset });
     const v1s = host.addSlider({ label: 'A 初速度', en: 'v1', min: 1, max: 8, step: .5, value: 4, unit: 'm/s', dp: 1, oninput: reset });
-    const m2s = host.addSlider({ label: 'B 质量', en: 'm2', min: .5, max: 5, step: .5, value: 3, unit: 'kg', dp: 1, oninput: reset });
+    const m2s = host.addSlider({ label: 'B 質量', en: 'm2', min: .5, max: 5, step: .5, value: 3, unit: 'kg', dp: 1, oninput: reset });
     const v2s = host.addSlider({ label: 'B 初速度', en: 'v2', min: -6, max: 2, step: .5, value: 0, unit: 'm/s', dp: 1, oninput: reset });
     let elastic = true, x1 = -3.4, x2 = 1.4, u1 = 0, u2 = 0, done = false, timer = 0;
-    host.addToggle('弹性碰撞', true, v => { elastic = v; reset(); });
+    host.addToggle('彈性碰撞', true, v => { elastic = v; reset(); });
     host.setCam({ az: .3, el: .2, dist: 9.6, fov: 40, target: [0, .55, 0] });
 
     function reset() {
@@ -456,13 +456,13 @@
       const Emax = Math.max(E0, .01);
       energyBars(ctx, W - 78, 20, 44, 8, [['p_A', Math.abs(pA), C().red], ['p_B', Math.abs(pB), C().indigo]], Math.max(Math.abs(p0), 1));
       energyBars(ctx, W - 78, 74, 44, 8, [['E_k', EA + EB, C().ochre]], Emax);
-      D.text(ctx, '动量守恒', W - 100, 12, C().soft, 8.5, 'right');
+      D.text(ctx, '動量守恆', W - 100, 12, C().soft, 8.5, 'right');
 
       host.setReadout([
-        { k: '总动量 p', v: fmt(p0, 2), unit: 'kg·m/s' },
-        { k: '碰后总动能', v: fmt(EA + EB, 2), unit: 'J' },
-        { k: '碰前总动能', v: fmt(E0, 2), unit: 'J' },
-        { k: '动能损失', v: fmt(E0 - EA - EB, 2), unit: 'J' }
+        { k: '總動量 p', v: fmt(p0, 2), unit: 'kg·m/s' },
+        { k: '碰後總動能', v: fmt(EA + EB, 2), unit: 'J' },
+        { k: '碰前總動能', v: fmt(E0, 2), unit: 'J' },
+        { k: '動能損失', v: fmt(E0 - EA - EB, 2), unit: 'J' }
       ]);
     });
     return {};
@@ -470,9 +470,9 @@
 
   /* =========================================================== capacitor */
   PHYS.defineSim3D('capacitor', function (host) {
-    const V = host.addSlider({ label: '电压 U', en: 'voltage', min: 10, max: 500, step: 10, value: 200, unit: 'V', dp: 0 });
-    const dd = host.addSlider({ label: '板间距 d', en: 'gap', min: .5, max: 4, step: .1, value: 1.5, unit: 'mm', dp: 1 });
-    const AA = host.addSlider({ label: '正对面积 S', en: 'area', min: 10, max: 100, step: 5, value: 50, unit: 'cm²', dp: 0 });
+    const V = host.addSlider({ label: '電壓 U', en: 'voltage', min: 10, max: 500, step: 10, value: 200, unit: 'V', dp: 0 });
+    const dd = host.addSlider({ label: '板間距 d', en: 'gap', min: .5, max: 4, step: .1, value: 1.5, unit: 'mm', dp: 1 });
+    const AA = host.addSlider({ label: '正對面積 S', en: 'area', min: 10, max: 100, step: 5, value: 50, unit: 'cm²', dp: 0 });
     host.setCam({ az: .52, el: .16, dist: 7.5, fov: 40, target: [0, 0, 0] });
 
     host.onTick((dt) => {
@@ -495,13 +495,13 @@
           G.arrow([-gap + .08, i * side * .3, j * side * .3], [gap - .08, i * side * .3, j * side * .3], { color: C().teal, width: 1.3, head: 6 });
         }
       }
-      G.text([0, -side / 2 - .25, 0], 'E = U/d，板间匀强电场', { size: 9, color: C().soft, align: 'center' });
+      G.text([0, -side / 2 - .25, 0], 'E = U/d，板間勻強電場', { size: 9, color: C().soft, align: 'center' });
 
       host.setReadout([
-        { k: '电容 C', v: fmt(Cc * 1e12, 1), unit: 'pF' },
-        { k: '电荷 Q', v: fmt(Q * 1e9, 2), unit: 'nC' },
-        { k: '场强 E', v: fmt(E / 1000, 1), unit: 'kV/m' },
-        { k: '储能', v: fmt(.5 * Cc * U * U * 1e6, 2), unit: 'µJ' }
+        { k: '電容 C', v: fmt(Cc * 1e12, 1), unit: 'pF' },
+        { k: '電荷 Q', v: fmt(Q * 1e9, 2), unit: 'nC' },
+        { k: '場強 E', v: fmt(E / 1000, 1), unit: 'kV/m' },
+        { k: '儲能', v: fmt(.5 * Cc * U * U * 1e6, 2), unit: 'µJ' }
       ]);
     });
     return {};
@@ -510,7 +510,7 @@
   /* ================================================================ coil */
   PHYS.defineSim3D('coil', function (host) {
     const AA = host.addSlider({ label: '振幅', en: 'amplitude', min: .6, max: 2.2, step: .1, value: 1.6, dp: 1 });
-    const spd = host.addSlider({ label: '频率', en: 'frequency', min: .2, max: 1.2, step: .05, value: .5, unit: 'Hz', dp: 2 });
+    const spd = host.addSlider({ label: '頻率', en: 'frequency', min: .2, max: 1.2, step: .05, value: .5, unit: 'Hz', dp: 2 });
     let phase = 0;
     host.setCam({ az: .5, el: .22, dist: 8.6, fov: 40, target: [0, 0, 0] });
     const helix = host.dynLine(300, null, false);
@@ -536,7 +536,7 @@
       }
       helix.obj.material = window.PHYS._lineMat(C().ochre, 1);
       helix.commit(n);
-      G.text([0, -r - .3, 0], '线圈', { size: 9, color: C().ochre, align: 'center' });
+      G.text([0, -r - .3, 0], '線圈', { size: 9, color: C().ochre, align: 'center' });
 
       // magnet
       const mw = .75;
@@ -562,14 +562,14 @@
       }
       ctx.strokeStyle = C().teal; ctx.lineWidth = 1.5; ctx.stroke();
       D.circle(ctx, gx + gw, gy + gh / 2 - clamp(emf * .55, -1, 1) * gh * .46, 3, C().red);
-      D.text(ctx, '感应电动势 ε', gx + 2, gy - 4, C().soft, 8.5);
-      D.text(ctx, '磁体位置 x', gx + gw, gy + gh / 2 + 10, C().soft, 8.5, 'right');
+      D.text(ctx, '感應電動勢 ε', gx + 2, gy - 4, C().soft, 8.5);
+      D.text(ctx, '磁體位置 x', gx + gw, gy + gh / 2 + 10, C().soft, 8.5, 'right');
 
       host.setReadout([
         { k: '磁通量 Φ', v: fmt(Phi, 2) },
-        { k: '电动势 ε', v: fmt(emf, 2), unit: 'V*' },
-        { k: '磁体速度', v: fmt(vm, 2), unit: 'm/s' },
-        { k: '感应电流', v: emf > .05 ? '逆时针' : emf < -.05 ? '顺时针' : '无' }
+        { k: '電動勢 ε', v: fmt(emf, 2), unit: 'V*' },
+        { k: '磁體速度', v: fmt(vm, 2), unit: 'm/s' },
+        { k: '感應電流', v: emf > .05 ? '逆時針' : emf < -.05 ? '順時針' : '無' }
       ]);
     });
     return {};
@@ -578,7 +578,7 @@
   /* ============================================================= rotation */
   PHYS.defineSim3D('rotation', function (host) {
     const tau = host.addSlider({ label: '力矩 τ', en: 'torque', min: -8, max: 8, step: .5, value: 3, unit: 'N·m', dp: 1 });
-    const inertia = host.addSlider({ label: '转动惯量 I', en: 'inertia', min: .5, max: 8, step: .5, value: 2, unit: 'kg·m²', dp: 1 });
+    const inertia = host.addSlider({ label: '轉動慣量 I', en: 'inertia', min: .5, max: 8, step: .5, value: 2, unit: 'kg·m²', dp: 1 });
     let om = 0, ang = 0;
     host.setCam({ az: .55, el: .26, dist: 7, fov: 40, target: [0, .1, 0] });
 
@@ -608,8 +608,8 @@
       host.setReadout([
         { k: '角加速度 α', v: fmt(alpha, 2), unit: 'rad/s²' },
         { k: '角速度 ω', v: fmt(om, 2), unit: 'rad/s' },
-        { k: '角动量 L', v: fmt(I * om, 2), unit: 'kg·m²/s' },
-        { k: '转动动能', v: fmt(.5 * I * om * om, 1), unit: 'J' }
+        { k: '角動量 L', v: fmt(I * om, 2), unit: 'kg·m²/s' },
+        { k: '轉動動能', v: fmt(.5 * I * om * om, 1), unit: 'J' }
       ]);
     });
     return {};
@@ -617,8 +617,8 @@
 
   /* ============================================================ buoyancy */
   PHYS.defineSim3D('buoyancy', function (host) {
-    const rho = host.addSlider({ label: '物体密度 ρ', en: 'density', min: .2, max: 3, step: .1, value: .6, unit: 'g/cm³', dp: 1 });
-    const water = host.addSlider({ label: '液体密度', en: 'liquid', min: .7, max: 1.6, step: .05, value: 1.0, unit: 'g/cm³', dp: 2 });
+    const rho = host.addSlider({ label: '物體密度 ρ', en: 'density', min: .2, max: 3, step: .1, value: .6, unit: 'g/cm³', dp: 1 });
+    const water = host.addSlider({ label: '液體密度', en: 'liquid', min: .7, max: 1.6, step: .05, value: 1.0, unit: 'g/cm³', dp: 2 });
     const g = 9.8;
     const h = 1.3, side = 1.1;
     host.setCam({ az: .62, el: .18, dist: 10.5, fov: 40, target: [0, 1.4, 0] });
@@ -660,12 +660,12 @@
         G.text([.35, bottom + .1 + Fh, side / 2 + .05], 'F浮', { dx: 8, dy: -6, size: 10, color: C().teal });
       }
 
-      const state = r < 1 ? (r < .98 ? '漂浮' : '悬浮') : '沉底';
+      const state = r < 1 ? (r < .98 ? '漂浮' : '懸浮') : '沉底';
       host.setReadout([
         { k: '重力 G', v: fmt(Wt, 0), unit: 'N' },
         { k: '浮力 F', v: fmt(Fb, 0), unit: 'N' },
         { k: '浸入比例', v: fmt(Math.min(sub / h, 1) * 100, 0), unit: '%' },
-        { k: '状态', v: state }
+        { k: '狀態', v: state }
       ]);
     });
     return {};

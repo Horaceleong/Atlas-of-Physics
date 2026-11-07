@@ -449,6 +449,15 @@ h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); font-weight: 600;
   .concept { margin-top: 30px; padding-top: 26px; }
 }
 
+/* very narrow screens: compact the bar so nothing spills past the edge */
+@media (max-width: 480px) {
+  .topbar { gap: 8px; padding: 0 12px; }
+  .brand b { font-size: 16px; }
+  .icon-btn { width: 30px; height: 30px; }
+  .seg { padding: 2px; }
+  .seg button { padding: 4px 9px; font-size: 12px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   html { scroll-behavior: auto; }

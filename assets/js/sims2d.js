@@ -19,7 +19,7 @@
   PHYS.defineSim('motion', function (host) {
     let mode = 0, s = 0, t = 0, pause = false;
     const sp = host.addSlider({ label: '速度', en: 'speed', min: 1, max: 10, step: .5, value: 5, unit: 'm/s', dp: 1, oninput: () => { s = 0; t = 0; } });
-    PHYS.radio(host, ['匀速运动', '匀加速运动'], 0, i => { mode = i; s = 0; t = 0; });
+    PHYS.radio(host, ['勻速運動', '勻加速運動'], 0, i => { mode = i; s = 0; t = 0; });
 
     const L = 100; // metres of track
     host.onTick((dt) => {
@@ -87,7 +87,7 @@
       D.circle(ctx, X(Math.min(t, tmax)), Y(Math.min(s, smax)), 3.6, C().red);
 
       host.setReadout([
-        { k: '时间 t', v: fmt(t, 1), unit: 's' },
+        { k: '時間 t', v: fmt(t, 1), unit: 's' },
         { k: '位移 s', v: fmt(s, 1), unit: 'm' },
         { k: '速度 v', v: fmt(mode === 0 ? sp.value : 2 * t, 1), unit: 'm/s' },
         { k: '平均速度', v: fmt(s / Math.max(t, .001), 1), unit: 'm/s' }
@@ -98,10 +98,10 @@
   /* ================================================================= wave */
   PHYS.defineSim('wave', function (host, cfg) {
     let mode = cfg && cfg.mode === 'long' ? 1 : 0;
-    const fq = host.addSlider({ label: '频率', en: 'frequency', min: .5, max: 4, step: .1, value: 1, unit: 'Hz', dp: 1 });
+    const fq = host.addSlider({ label: '頻率', en: 'frequency', min: .5, max: 4, step: .1, value: 1, unit: 'Hz', dp: 1 });
     const vv = host.addSlider({ label: '波速', en: 'wave speed', min: 2, max: 10, step: .5, value: 6, unit: 'm/s', dp: 1 });
     const am = host.addSlider({ label: '振幅', en: 'amplitude', min: .3, max: 1, step: .05, value: .7, dp: 2 });
-    PHYS.radio(host, ['横波', '纵波'], mode, i => { mode = i; });
+    PHYS.radio(host, ['橫波', '縱波'], mode, i => { mode = i; });
 
     const XMAX = 12; // metres across the canvas
     host.onTick((dt, t) => {
@@ -137,7 +137,7 @@
         D.line(ctx, X(xp), y0, X(xp), yp, C().faint, 1, [2, 3]);
         D.circle(ctx, X(xp), yp, 4, C().ink);
         D.arrow(ctx, X(xp), yp, X(xp), yp + clamp(vp * .06, -26, 26), C().teal, 1.6, 6);
-        D.text(ctx, '质点只上下振动', X(xp) + 8, yp - 12, C().teal, 9);
+        D.text(ctx, '質點只上下振動', X(xp) + 8, yp - 12, C().teal, 9);
         D.line(ctx, pad, y0 - amp - 14, W - pad, y0 - amp - 14, 'transparent', 1);
       } else {
         const y1 = H * .26, y2 = H * .78, rows = 5;
@@ -147,7 +147,7 @@
         // speaker
         const spx = pad - 12;
         D.line(ctx, spx, y1 + 6, spx, y2 - 6, C().ink, 2.5);
-        D.text(ctx, '声源', spx - 4, y1 - 10, C().soft, 9, 'center');
+        D.text(ctx, '聲源', spx - 4, y1 - 10, C().soft, 9, 'center');
         const ampPx = A * 6;
         for (let r = 0; r < rows; r++) {
           const yy = y1 + (y2 - y1) * (r + .5) / rows;
@@ -166,13 +166,13 @@
             D.text(ctx, '密', X(xc), y1 - 8, C().muted || C().soft, 9, 'center');
           }
         }
-        D.text(ctx, '疏 → 密 → 疏：空气被压缩和拉伸', W / 2, H * .93, C().soft, 9.5, 'center');
+        D.text(ctx, '疏 → 密 → 疏：空氣被壓縮和拉伸', W / 2, H * .93, C().soft, 9.5, 'center');
       }
 
       host.setReadout([
-        { k: '频率 f', v: fmt(f, 2), unit: 'Hz' },
-        { k: '周期 T', v: fmt(1 / f, 2), unit: 's' },
-        { k: '波长 λ', v: fmt(lam, 2), unit: 'm' },
+        { k: '頻率 f', v: fmt(f, 2), unit: 'Hz' },
+        { k: '週期 T', v: fmt(1 / f, 2), unit: 's' },
+        { k: '波長 λ', v: fmt(lam, 2), unit: 'm' },
         { k: '波速 v = λf', v: fmt(v, 1), unit: 'm/s' }
       ]);
     });
@@ -192,11 +192,11 @@
       ctx.fillRect(W * .08, my, W * .84, 10);
       D.line(ctx, W * .08, my, W * .92, my, C().ink, 2);
       for (let x = W * .08; x < W * .92; x += 9) D.line(ctx, x, my + 10, x - 5, my + 16, C().faint, 1);
-      D.text(ctx, '平面镜', W * .08 + 2, my + 30, C().soft, 9);
+      D.text(ctx, '平面鏡', W * .08 + 2, my + 30, C().soft, 9);
 
       // normal
       D.line(ctx, cx, my, cx, my - L * 1.25, C().faint, 1, [4, 4]);
-      D.text(ctx, '法线', cx + 5, my - L * 1.25, C().soft, 9);
+      D.text(ctx, '法線', cx + 5, my - L * 1.25, C().soft, 9);
 
       const S = [cx - Math.sin(th) * L, my - Math.cos(th) * L];
       const R = [cx + Math.sin(th) * L, my - Math.cos(th) * L];
@@ -216,14 +216,14 @@
       D.text(ctx, 'θ₂=' + ang.value + '°', cx + Math.sin(th / 2) * 68, my - Math.cos(th / 2) * 68, C().teal, 9.5, 'center');
 
       // labels
-      D.text(ctx, '入射光线', S[0] - 4, S[1] + 12, C().red, 9);
-      D.text(ctx, '反射光线', R[0] + 2, R[1] + 12, C().red, 9);
-      D.text(ctx, '入射点 O', cx + 8, my + 22, C().soft, 9);
+      D.text(ctx, '入射光線', S[0] - 4, S[1] + 12, C().red, 9);
+      D.text(ctx, '反射光線', R[0] + 2, R[1] + 12, C().red, 9);
+      D.text(ctx, '入射點 O', cx + 8, my + 22, C().soft, 9);
 
       host.setReadout([
         { k: '入射角 θ₁', v: ang.value + '', unit: '°' },
         { k: '反射角 θ₂', v: ang.value + '', unit: '°' },
-        { k: '关系', v: 'θ₁ = θ₂' }
+        { k: '關係', v: 'θ₁ = θ₂' }
       ]);
     });
   });
@@ -232,8 +232,8 @@
   PHYS.defineSim('refraction', function (host) {
     let reverse = false;
     const ang = host.addSlider({ label: '入射角', en: 'incidence', min: 0, max: 85, step: 1, value: 40, unit: '°', dp: 0 });
-    const nn = host.addSlider({ label: '下方介质折射率', en: 'n₂', min: 1.05, max: 1.9, step: .01, value: 1.33, dp: 2 });
-    PHYS.radio(host, ['空气 → 水', '水 → 空气'], 0, i => { reverse = i === 1; });
+    const nn = host.addSlider({ label: '下方介質折射率', en: 'n₂', min: 1.05, max: 1.9, step: .01, value: 1.33, dp: 2 });
+    PHYS.radio(host, ['空氣 → 水', '水 → 空氣'], 0, i => { reverse = i === 1; });
 
     host.onTick(() => {
       const { W, H, ctx } = host;
@@ -250,10 +250,10 @@
       ctx.fillStyle = 'rgba(47,111,106,.10)';
       ctx.fillRect(0, iy, W, H - iy);
       D.line(ctx, 0, iy, W, iy, C().ink, 1.5);
-      D.text(ctx, reverse ? '水  n = 1.33' : '空气  n = 1.00', 8, iy - 10, C().soft, 9);
-      D.text(ctx, reverse ? '空气  n = 1.00' : '水  n = ' + n2.toFixed(2), 8, iy + 14, C().soft, 9);
+      D.text(ctx, reverse ? '水  n = 1.33' : '空氣  n = 1.00', 8, iy - 10, C().soft, 9);
+      D.text(ctx, reverse ? '空氣  n = 1.00' : '水  n = ' + n2.toFixed(2), 8, iy + 14, C().soft, 9);
       D.line(ctx, cx, iy - H * .36, cx, iy + H * .36, C().faint, 1, [4, 4]);
-      D.text(ctx, '法线', cx + 5, iy - H * .36, C().soft, 9);
+      D.text(ctx, '法線', cx + 5, iy - H * .36, C().soft, 9);
 
       const L = H * .34;
       const S = [cx - Math.sin(th1) * L, iy - Math.cos(th1) * L];
@@ -274,7 +274,7 @@
         D.text(ctx, 'θ₂ = ' + (th2 * 180 / Math.PI).toFixed(0) + '°', cx + 10, iy + 58, C().teal, 9.5);
       } else {
         D.text(ctx, '全反射', cx + 14, iy + 26, C().red, 12);
-        D.text(ctx, '没有折射光线', cx + 14, iy + 42, C().red, 9);
+        D.text(ctx, '沒有折射光線', cx + 14, iy + 42, C().red, 9);
       }
       D.text(ctx, 'θ₁ = ' + ang.value + '°', cx - 52, iy - 44, C().red, 9.5);
 
@@ -282,7 +282,7 @@
       host.setReadout([
         { k: '入射角', v: ang.value + '', unit: '°' },
         { k: '折射角', v: tir ? '—' : fmt(th2 * 180 / Math.PI, 0), unit: tir ? '' : '°' },
-        { k: '临界角', v: critical ? fmt(critical, 1) : '—', unit: critical ? '°' : '' },
+        { k: '臨界角', v: critical ? fmt(critical, 1) : '—', unit: critical ? '°' : '' },
         { k: 'n₁sinθ₁', v: fmt(nTop * Math.sin(th1), 2) }
       ]);
     });
@@ -321,7 +321,7 @@
       ctx.strokeStyle = C().teal; ctx.lineWidth = 1.4;
       ctx.fill(); ctx.stroke();
       ctx.restore();
-      D.text(ctx, '凸透镜', X(0), ay - lh - 8, C().teal, 9, 'center');
+      D.text(ctx, '凸透鏡', X(0), ay - lh - 8, C().teal, 9, 'center');
 
       // focal points
       [[-f, 'F'], [f, "F′"]].forEach(([x, lab]) => {
@@ -369,7 +369,7 @@
         ctx.beginPath(); ctx.moveTo(X(v), ay); ctx.lineTo(X(v), Y(hi)); ctx.stroke();
         ctx.restore();
         D.arrow(ctx, X(v), ay, X(v), Y(hi), real ? C().teal : C().ochre, 1.8, 7);
-        D.text(ctx, real ? '实像' : '虚像', X(v) + 5, Y(hi) - 10, real ? C().teal : C().ochre, 9);
+        D.text(ctx, real ? '實像' : '虛像', X(v) + 5, Y(hi) - 10, real ? C().teal : C().ochre, 9);
         if (!real) {
           ctx.save(); ctx.setLineDash([3, 4]); ctx.strokeStyle = C().ochre; ctx.globalAlpha = .6;
           ctx.beginPath(); ctx.moveTo(X(0), Y(h)); ctx.lineTo(X(v), Y(hi)); ctx.stroke();
@@ -377,18 +377,18 @@
           ctx.restore();
         }
       } else if (near) {
-        D.text(ctx, '接近焦点：折射光近乎平行，成像在很远处', W / 2, H * .90, C().red, 9.5, 'center');
+        D.text(ctx, '接近焦點：折射光近乎平行，成像在很遠處', W / 2, H * .90, C().red, 9.5, 'center');
       }
 
       const m = near ? Infinity : Math.abs(v / u);
       let nature = '—';
       if (!near) {
-        nature = (v > 0 ? '倒立' : '正立') + '·' + (m > 1.02 ? '放大' : m < .98 ? '缩小' : '等大') + '·' + (v > 0 ? '实像' : '虚像');
+        nature = (v > 0 ? '倒立' : '正立') + '·' + (m > 1.02 ? '放大' : m < .98 ? '縮小' : '等大') + '·' + (v > 0 ? '實像' : '虛像');
       }
       host.setReadout([
         { k: '像距 v', v: near ? '∞' : fmt(v, 1), unit: near ? '' : 'cm' },
         { k: '放大率', v: near ? '—' : fmt(m, 2) + '×' },
-        { k: '像的性质', v: nature, small: true },
+        { k: '像的性質', v: nature, small: true },
         { k: '1/f = 1/u+1/v', v: '' }
       ]);
     });
@@ -396,8 +396,8 @@
 
   /* ============================================================== heating */
   PHYS.defineSim('heating', function (host) {
-    const mS = host.addSlider({ label: '质量', en: 'mass', min: .5, max: 2, step: .1, value: 1, unit: 'kg', dp: 1 });
-    const pS = host.addSlider({ label: '加热功率', en: 'power', min: 500, max: 2000, step: 100, value: 1000, unit: 'W', dp: 0 });
+    const mS = host.addSlider({ label: '質量', en: 'mass', min: .5, max: 2, step: .1, value: 1, unit: 'kg', dp: 1 });
+    const pS = host.addSlider({ label: '加熱功率', en: 'power', min: 500, max: 2000, step: 100, value: 1000, unit: 'W', dp: 0 });
     const C_ICE = 2100, L_F = 334000, C_W = 4180, L_V = 2260000, C_ST = 2000;
     let Q = 0;
 
@@ -405,11 +405,11 @@
       const { W, H, ctx } = host;
       const m = mS.value, P = pS.value;
       const segs = [
-        { q: m * C_ICE * 20, t0: -20, t1: 0, name: '冰升温', en: 'ice warms' },
+        { q: m * C_ICE * 20, t0: -20, t1: 0, name: '冰升溫', en: 'ice warms' },
         { q: m * L_F, t0: 0, t1: 0, name: '熔化（冰→水）', en: 'melting' },
-        { q: m * C_W * 100, t0: 0, t1: 100, name: '水升温', en: 'water warms' },
-        { q: m * L_V, t0: 100, t1: 100, name: '沸腾（水→水蒸气）', en: 'boiling' },
-        { q: m * C_ST * 20, t0: 100, t1: 120, name: '水蒸气升温', en: 'steam warms' }
+        { q: m * C_W * 100, t0: 0, t1: 100, name: '水升溫', en: 'water warms' },
+        { q: m * L_V, t0: 100, t1: 100, name: '沸騰（水→水蒸氣）', en: 'boiling' },
+        { q: m * C_ST * 20, t0: 100, t1: 120, name: '水蒸氣升溫', en: 'steam warms' }
       ];
       const QT = segs.reduce((s, x) => s + x.q, 0);
       Q += P * dt * 220;               // accelerated for viewing
@@ -465,20 +465,20 @@
       D.circle(ctx, X(tMinutes), Y(T), 4, C().ink, C().bg, 2);
 
       host.setReadout([
-        { k: '温度', v: fmt(T, 0), unit: '°C' },
-        { k: '状态', v: segs[idx].name.split('（')[0] },
-        { k: '时间', v: fmt(tMinutes, 1), unit: 'min' },
-        { k: '吸热', v: fmt(Q / 1000, 0), unit: 'kJ' }
+        { k: '溫度', v: fmt(T, 0), unit: '°C' },
+        { k: '狀態', v: segs[idx].name.split('（')[0] },
+        { k: '時間', v: fmt(tMinutes, 1), unit: 'min' },
+        { k: '吸熱', v: fmt(Q / 1000, 0), unit: 'kJ' }
       ]);
     });
   });
 
   /* ================================================================ lever */
   PHYS.defineSim('lever', function (host) {
-    const f1 = host.addSlider({ label: '左侧力 F₁', en: 'F1', min: 1, max: 20, step: .5, value: 6, unit: 'N', dp: 1 });
-    const l1 = host.addSlider({ label: '左侧力臂 L₁', en: 'L1', min: .2, max: 1.2, step: .05, value: .6, unit: 'm', dp: 2 });
-    const f2 = host.addSlider({ label: '右侧力 F₂', en: 'F2', min: 1, max: 20, step: .5, value: 9, unit: 'N', dp: 1 });
-    const l2 = host.addSlider({ label: '右侧力臂 L₂', en: 'L2', min: .2, max: 1.2, step: .05, value: .4, unit: 'm', dp: 2 });
+    const f1 = host.addSlider({ label: '左側力 F₁', en: 'F1', min: 1, max: 20, step: .5, value: 6, unit: 'N', dp: 1 });
+    const l1 = host.addSlider({ label: '左側力臂 L₁', en: 'L1', min: .2, max: 1.2, step: .05, value: .6, unit: 'm', dp: 2 });
+    const f2 = host.addSlider({ label: '右側力 F₂', en: 'F2', min: 1, max: 20, step: .5, value: 9, unit: 'N', dp: 1 });
+    const l2 = host.addSlider({ label: '右側力臂 L₂', en: 'L2', min: .2, max: 1.2, step: .05, value: .4, unit: 'm', dp: 2 });
 
     host.onTick(() => {
       const { W, H, ctx } = host;
@@ -525,7 +525,7 @@
       host.setReadout([
         { k: '左力矩', v: fmt(t1, 1), unit: 'N·m' },
         { k: '右力矩', v: fmt(t2, 1), unit: 'N·m' },
-        { k: '状态', v: state }
+        { k: '狀態', v: state }
       ]);
     });
   });
@@ -533,10 +533,10 @@
   /* ============================================================== circuit */
   PHYS.defineSim('circuit', function (host) {
     let par = false, phase = 0;
-    const U = host.addSlider({ label: '电源电压', en: 'voltage', min: 1.5, max: 12, step: .5, value: 6, unit: 'V', dp: 1 });
-    const R1 = host.addSlider({ label: '电阻 R₁', en: 'R1', min: 1, max: 20, step: 1, value: 6, unit: 'Ω', dp: 0 });
-    const R2 = host.addSlider({ label: '电阻 R₂', en: 'R2', min: 1, max: 20, step: 1, value: 3, unit: 'Ω', dp: 0 });
-    PHYS.radio(host, ['串联', '并联'], 0, i => { par = i === 1; });
+    const U = host.addSlider({ label: '電源電壓', en: 'voltage', min: 1.5, max: 12, step: .5, value: 6, unit: 'V', dp: 1 });
+    const R1 = host.addSlider({ label: '電阻 R₁', en: 'R1', min: 1, max: 20, step: 1, value: 6, unit: 'Ω', dp: 0 });
+    const R2 = host.addSlider({ label: '電阻 R₂', en: 'R2', min: 1, max: 20, step: 1, value: 3, unit: 'Ω', dp: 0 });
+    PHYS.radio(host, ['串聯', '並聯'], 0, i => { par = i === 1; });
 
     function resistor(x, y, horiz, label, col) {
       const ctx = host.ctx;
@@ -574,7 +574,7 @@
       if (!par) {
         resistor(W * .40, yT, true, 'R₁ ' + r1 + 'Ω', C().teal);
         resistor(W * .64, yT, true, 'R₂ ' + r2 + 'Ω', C().teal);
-        D.text(ctx, '串联：I 处处相等', W * .5, yB + 22, C().soft, 9, 'center');
+        D.text(ctx, '串聯：I 處處相等', W * .5, yB + 22, C().soft, 9, 'center');
       } else {
         D.line(ctx, W * .42, yT, W * .42, H * .38, C().ink, 1.4);
         D.line(ctx, W * .42, H * .62, W * .42, yB, C().ink, 1.4);
@@ -584,7 +584,7 @@
         D.line(ctx, W * .42, H * .62, W * .68, H * .62, C().ink, 1.4);
         resistor(W * .55, H * .38, true, 'R₁ ' + r1 + 'Ω', C().teal);
         resistor(W * .55, H * .62, true, 'R₂ ' + r2 + 'Ω', C().teal);
-        D.text(ctx, '并联：各支路电压相等', W * .5, yB + 22, C().soft, 9, 'center');
+        D.text(ctx, '並聯：各支路電壓相等', W * .5, yB + 22, C().soft, 9, 'center');
       }
 
       // current dots
@@ -620,11 +620,11 @@
       });
 
       host.setReadout([
-        { k: '总电阻', v: fmt(par ? r1 * r2 / (r1 + r2) : r1 + r2, 2), unit: 'Ω' },
-        { k: '总电流 I', v: fmt(I, 2), unit: 'A' },
+        { k: '總電阻', v: fmt(par ? r1 * r2 / (r1 + r2) : r1 + r2, 2), unit: 'Ω' },
+        { k: '總電流 I', v: fmt(I, 2), unit: 'A' },
         { k: 'U₁', v: fmt(U1, 2), unit: 'V' },
         { k: 'U₂', v: fmt(U2, 2), unit: 'V' },
-        { k: '总功率', v: fmt(u * I, 2), unit: 'W' }
+        { k: '總功率', v: fmt(u * I, 2), unit: 'W' }
       ]);
     });
   });
@@ -632,10 +632,10 @@
   /* ================================================================ field */
   PHYS.defineSim('field', function (host, cfg) {
     const mode = (cfg && cfg.mode) || 'charges';
-    const gain = host.addSlider({ label: '场源强度', en: 'strength', min: .4, max: 2, step: .1, value: 1, dp: 1 });
+    const gain = host.addSlider({ label: '場源強度', en: 'strength', min: .4, max: 2, step: .1, value: 1, dp: 1 });
     let showVec = true, showLines = true;
-    host.addToggle('向量箭头', true, v => showVec = v);
-    host.addToggle('场线', true, v => showLines = v);
+    host.addToggle('向量箭頭', true, v => showVec = v);
+    host.addToggle('場線', true, v => showLines = v);
 
     function fieldAt(x, y, W, H, k) {
       if (mode === 'charges') {
@@ -744,8 +744,8 @@
       } else if (mode === 'wire') {
         D.circle(ctx, W / 2, H / 2, 11, C().red);
         D.circle(ctx, W / 2, H / 2, 3.5, C().bg);
-        D.text(ctx, 'I 出纸面', W / 2, H / 2 + 30, C().red, 9, 'center');
-        D.text(ctx, 'B 沿逆时针', W / 2, H / 2 - 26, C().soft, 9, 'center');
+        D.text(ctx, 'I 出紙面', W / 2, H / 2 + 30, C().red, 9, 'center');
+        D.text(ctx, 'B 沿逆時針', W / 2, H / 2 - 26, C().soft, 9, 'center');
       } else {
         const w = W * .13, h = H * .11;
         ctx.fillStyle = C().red; ctx.fillRect(W * .40 - w / 2, H * .5 - h / 2, w / 2, h);
@@ -756,10 +756,10 @@
       }
 
       const labels = {
-        charges: ['等量异种电荷的电场线', '从正电荷出发，终止于负电荷'],
-        plates: ['平行板间的匀强电场', 'E 处处相同，方向由正极板指向负极板'],
-        wire: ['直线电流的磁场', '安培定则：右手握住导线，拇指指电流'],
-        magnet: ['条形磁体的磁感线', '磁体外部由 N 极指向 S 极']
+        charges: ['等量異種電荷的電場線', '從正電荷出發，終止於負電荷'],
+        plates: ['平行板間的勻強電場', 'E 處處相同，方向由正極板指向負極板'],
+        wire: ['直線電流的磁場', '安培定則：右手握住導線，拇指指電流'],
+        magnet: ['條形磁體的磁感線', '磁體外部由 N 極指向 S 極']
       }[mode];
       D.text(ctx, labels[0], 10, 36, C().ink, 9.5);
       D.text(ctx, labels[1], 10, 50, C().soft, 8.5);
@@ -770,8 +770,8 @@
   /* ================================================================ fluid */
   PHYS.defineSim('fluid', function (host) {
     let ps = [];
-    const v1 = host.addSlider({ label: '宽处流速 v₁', en: 'v1', min: .5, max: 4, step: .1, value: 1.2, unit: 'm/s', dp: 1 });
-    const ratio = host.addSlider({ label: '窄处/宽处 面积比', en: 'A₂/A₁', min: .25, max: 1, step: .05, value: .4, dp: 2 });
+    const v1 = host.addSlider({ label: '寬處流速 v₁', en: 'v1', min: .5, max: 4, step: .1, value: 1.2, unit: 'm/s', dp: 1 });
+    const ratio = host.addSlider({ label: '窄處/寬處 面積比', en: 'A₂/A₁', min: .25, max: 1, step: .05, value: .4, dp: 2 });
 
     host.onTick((dt) => {
       const { W, H, ctx } = host;
@@ -822,8 +822,8 @@
         D.text(ctx, label, x, cx - hh - colH - 12, col, 9, 'center');
         D.text(ctx, (p / 1000).toFixed(1) + ' kPa', x, cx - hh - colH - 25, C().soft, 8.5, 'center');
       }
-      gauge(W * .30, p1, '宽处', C().teal);
-      gauge(W * .52, p2, '窄处', C().red);
+      gauge(W * .30, p1, '寬處', C().teal);
+      gauge(W * .52, p2, '窄處', C().red);
 
       D.text(ctx, 'A₁v₁ = A₂v₂', 12, 16, C().ink, 10);
       D.text(ctx, 'p + ½ρv² = 常量', 12, 31, C().soft, 9);
@@ -853,9 +853,9 @@
     }
     const g = 9.8;
     let x = 0.02, dir = 1, running = true, h0 = 2.7;
-    host.addToggle('暂停', false, v => running = !v);
+    host.addToggle('暫停', false, v => running = !v);
     host.addSlider({
-      label: '起点高度', en: 'start height', min: 1.8, max: 3.2, step: .1, value: 2.7, unit: 'm', dp: 1,
+      label: '起點高度', en: 'start height', min: 1.8, max: 3.2, step: .1, value: 2.7, unit: 'm', dp: 1,
       oninput: v => { h0 = v; x = .02; dir = 1; }
     });
 
@@ -903,8 +903,8 @@
       host.setReadout([
         { k: '高度 h', v: fmt(h, 2), unit: 'm' },
         { k: '速度 v', v: fmt(v, 1), unit: 'm/s' },
-        { k: '动能', v: fmt(KE, 0), unit: 'J' },
-        { k: '势能', v: fmt(PE, 0), unit: 'J' }
+        { k: '動能', v: fmt(KE, 0), unit: 'J' },
+        { k: '勢能', v: fmt(PE, 0), unit: 'J' }
       ]);
     });
   });

@@ -34,43 +34,43 @@
     P.setTheme(state.theme);
     $$('.theme-btn').forEach(b => {
       b.textContent = state.theme === 'ink' ? '☀' : '☾';
-      b.setAttribute('aria-label', state.theme === 'ink' ? '切换亮色' : '切换夜间');
+      b.setAttribute('aria-label', state.theme === 'ink' ? '切換亮色' : '切換夜間');
     });
   }
 
   function topbar(ch) {
     const crumb = ch
-      ? `<a class="back" href="#/" aria-label="返回首页">←</a>
+      ? `<a class="back" href="#/" aria-label="返回首頁">←</a>
          <span class="chapter-crumb">
            <b>${esc(ch.title.zh)}</b><i>/</i><span>${esc(ch.title.en)}</span>
          </span>`
       : '';
     return `<header class="topbar">
-      <a class="brand" href="#/"><span class="brand-dot"></span><b>Atlas of Physics</b><span>物理图谱</span></a>
+      <a class="brand" href="#/"><span class="brand-dot"></span><b>Atlas of Physics</b><span>物理圖譜</span></a>
       ${crumb}
       <span class="grow"></span>
       <button class="tb-btn search-btn" type="button" aria-haspopup="dialog" aria-expanded="false">
         <span aria-hidden="true">⌕</span><span class="tb-label">搜索</span><kbd class="tb-kbd">⌘K</kbd>
       </button>
       <button class="tb-btn toc-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="drawer">
-        <span aria-hidden="true">☰</span><span class="tb-label">目录</span>
+        <span aria-hidden="true">☰</span><span class="tb-label">目錄</span>
       </button>
-      <div class="seg lang" role="group" aria-label="语言">
+      <div class="seg lang" role="group" aria-label="語言">
         <button data-lang="zh" type="button">中</button><button data-lang="both" type="button">中英</button><button data-lang="en" type="button">EN</button>
       </div>
-      <button class="icon-btn theme-btn" type="button" aria-label="切换夜间">☾</button>
+      <button class="icon-btn theme-btn" type="button" aria-label="切換夜間">☾</button>
     </header>`;
   }
 
   function footer() {
     return `<footer class="footer">
       <div class="fcol">
-        <span><b>物理图谱 · Atlas of Physics</b> — 离线双语物理教学平台</span>
-        <span>内容结构参考 <a href="https://github.com/nathanliow/atlas-of-physics" target="_blank" rel="noopener">nathanliow/atlas-of-physics</a>（MIT 许可）；中文撰写、初中部分与全部互动图为本项目重写。</span>
+        <span><b>物理圖譜 · Atlas of Physics</b> — 離線雙語物理教學平台</span>
+        <span>內容結構參考 <a href="https://github.com/nathanliow/atlas-of-physics" target="_blank" rel="noopener">nathanliow/atlas-of-physics</a>（MIT 許可）；中文撰寫、初中部分與全部互動圖為本項目重寫。</span>
       </div>
       <div class="fcol">
-        <span>互动补充资源，<b>非官方教材</b>。教材单元与课标主题标注仅作教学对照，非官方解读。</span>
-        <span class="fhint"><kbd>⌘K</kbd> 搜索 · <kbd>Alt</kbd>+<kbd>←</kbd><kbd>→</kbd> 翻章 · <a href="LICENSE">许可</a></span>
+        <span>互動補充資源，<b>非官方教材</b>。教材單元與課標主題標註僅作教學對照，非官方解讀。</span>
+        <span class="fhint"><kbd>⌘K</kbd> 搜索 · <kbd>Alt</kbd>+<kbd>←</kbd><kbd>→</kbd> 翻章 · <a href="LICENSE">許可</a></span>
       </div>
     </footer>`;
   }
@@ -81,20 +81,20 @@
     return `<div class="map-band" data-track="${kind}">
       <div class="map-top">
         <div class="map-title">
-          <span>学习地图</span><i>Learning map</i>
+          <span>學習地圖</span><i>Learning map</i>
         </div>
-        <div class="map-progress" aria-label="阅读进度 ${done} / ${list.length}">
+        <div class="map-progress" aria-label="閲讀進度 ${done} / ${list.length}">
           <span class="mp-bar"><i style="width:${list.length ? (done / list.length * 100) : 0}%"></i></span>
           <span class="mp-num">${done}<em>/${list.length}</em></span>
         </div>
       </div>
       <div class="map-scroll">
-        <div class="map-holder" data-map="${kind}"><p class="map-loading">正在排布学习地图…</p></div>
+        <div class="map-holder" data-map="${kind}"><p class="map-loading">正在排布學習地圖…</p></div>
       </div>
       <div class="map-foot">
-        <span class="lg"><i class="lg-dot done"></i>已读</span>
-        <span class="lg"><i class="lg-line"></i>箭头：建议先学左侧</span>
-        <span class="lg map-scrollhint">窄屏可左右拖动 →</span>
+        <span class="lg"><i class="lg-dot done"></i>已讀</span>
+        <span class="lg"><i class="lg-line"></i>箭頭：建議先學左側</span>
+        <span class="lg map-scrollhint">窄屏可左右拖動 →</span>
       </div>
     </div>`;
   }
@@ -119,8 +119,8 @@
       <div class="en-title">${esc(c.title.en)}</div>
       <p>${esc(c.summary.zh)}</p>
       <div class="card-foot">
-        <span class="go">${c.concepts.length} 节 · ${c.sims.length} 图 →</span>
-        ${done ? '<span class="read">已读</span>' : ''}
+        <span class="go">${c.concepts.length} 節 · ${c.sims.length} 圖 →</span>
+        ${done ? '<span class="read">已讀</span>' : ''}
       </div>
     </a>`;
   }
@@ -142,22 +142,22 @@
     const nSim = P.chapters.reduce((s, c) => s + c.sims.length, 0);
     const nTerm = P.chapters.reduce((s, c) => s + c.terms.length, 0);
     const lastC = byId[state.last];
-    document.title = '物理图谱 · Atlas of Physics — 离线双语物理教学平台';
+    document.title = '物理圖譜 · Atlas of Physics — 離線雙語物理教學平台';
     document.documentElement.dataset.view = 'home';
     $('#app').innerHTML = `
       ${topbar()}
       <main class="home fade" id="main">
         <section class="hero">
           <div>
-            <div class="kicker">离线 · 中英对照 · ${P.chapters.length} 章</div>
-            <h1>把物理<br>画成<em>可以转动</em>的图</h1>
+            <div class="kicker">離線 · 中英對照 · ${P.chapters.length} 章</div>
+            <h1>把物理<br>畫成<em>可以轉動</em>的圖</h1>
             <div class="sub">An offline, bilingual atlas of physics — from a falling ball to an induced current.</div>
           </div>
           <div class="hero-side">
-            <p>左边是中文与英文并排的课文，右边是可以拖动、缩放的立体图。每个知识点配一张图，每张图都能改参数、看读数。</p>
+            <p>左邊是中文與英文並排的課文，右邊是可以拖動、縮放的立體圖。每個知識點配一張圖，每張圖都能改參數、看讀數。</p>
             <span class="en">Every concept carries a figure you can turn, zoom and change.</span>
             ${lastC ? `<a class="resume" href="#/c/${lastC.id}">
-              <span class="rlab">继续上次</span>
+              <span class="rlab">繼續上次</span>
               <span class="rtitle">${esc(lastC.title.zh)}</span>
               <span class="rarrow" aria-hidden="true">→</span>
             </a>` : ''}
@@ -166,15 +166,15 @@
 
         <div class="stats">
           <div class="stat"><b>${P.chapters.length}</b><span>章 <i>chapters</i></span></div>
-          <div class="stat"><b>${nConcept}</b><span>知识点 <i>concepts</i></span></div>
-          <div class="stat"><b>${nSim}</b><span>互动图 <i>figures</i></span></div>
-          <div class="stat"><b>${nTerm}</b><span>术语 <i>terms</i></span></div>
+          <div class="stat"><b>${nConcept}</b><span>知識點 <i>concepts</i></span></div>
+          <div class="stat"><b>${nSim}</b><span>互動圖 <i>figures</i></span></div>
+          <div class="stat"><b>${nTerm}</b><span>術語 <i>terms</i></span></div>
         </div>
 
         ${trackSection('junior', junior, '初中物理', 'Junior secondary · grades 8–9',
-          '从测量、声、光、热、力到电与磁，对应初中课程标准的核心内容。每章三到六节，配一张可操作的图。')}
+          '從測量、聲、光、熱、力到電與磁，對應初中課程標準的核心內容。每章三到六節，配一張可操作的圖。')}
         ${trackSection('senior', senior, '高中物理', 'Senior secondary · compulsory & elective',
-          '力学、热学、电磁学到刚体转动，公式推导与图像并重。标「拓展」的章节超出必修范围，供竞赛与 AP 衔接使用。')}
+          '力學、熱學、電磁學到剛體轉動，公式推導與圖像並重。標「拓展」的章節超出必修範圍，供競賽與 AP 銜接使用。')}
       </main>
       ${footer()}`;
     applyLang(); applyTheme();
@@ -195,21 +195,21 @@
         <p class="zh-block">${c.b.zh}</p>
         <p class="en en-block">${esc(c.b.en)}</p>
         ${c.f ? `<div class="formula">${c.f}<span class="cap">公式 · formula</span></div>` : ''}
-        ${c.note ? `<div class="pitfall"><b>易错点</b> ${c.note.zh}<span class="en">${esc(c.note.en)}</span></div>` : ''}
+        ${c.note ? `<div class="pitfall"><b>易錯點</b> ${c.note.zh}<span class="en">${esc(c.note.en)}</span></div>` : ''}
       </div>
     </section>`;
   }
 
   function termsHTML(c) {
     return `<div class="terms" id="terms-${c.id}">
-      <h3>术语对照</h3><div class="en">Key terms</div>
+      <h3>術語對照</h3><div class="en">Key terms</div>
       <table>${c.terms.map(t => `<tr><td>${esc(t[0])}</td><td>${esc(t[1])}</td><td>${esc(t[2] || '')}</td></tr>`).join('')}</table>
     </div>`;
   }
 
   function practiceHTML(list) {
     return `<div class="practice">
-      <h3>即时练习</h3><div class="en">Check yourself</div>
+      <h3>即時練習</h3><div class="en">Check yourself</div>
       ${list.map((q, qi) => `<div class="q" data-q="${qi}">
         <div class="qno">Q${qi + 1}</div>
         <p class="qtext zh-block">${esc(q.q.zh)}</p>
@@ -232,7 +232,7 @@
       state.visited.push(id); store.set('visited', state.visited);
     }
     state.last = id; store.set('last', id);
-    document.title = c.title.zh + ' · ' + c.title.en + ' — 物理图谱';
+    document.title = c.title.zh + ' · ' + c.title.en + ' — 物理圖譜';
     document.documentElement.dataset.view = 'chapter';
 
     const m = P.meta[c.id] || {};
@@ -253,8 +253,8 @@
             <div class="meta-chips">
               ${chip1 ? `<span class="chip strong"><span class="zh-block">${esc(chip1)}</span><span class="en en-block">${esc(chip1En)}</span></span>` : ''}
               ${m.unit ? `<span class="chip"><span class="zh-block">${esc(m.unit)}</span><span class="en en-block">${esc(m.unitEn || '')}</span></span>` : ''}
-              <span class="chip"><span class="zh-block">${c.concepts.length} 节</span><span class="en en-block">${c.concepts.length} sections</span></span>
-              <span class="chip"><span class="zh-block">${c.sims.length} 互动图</span><span class="en en-block">${c.sims.length} figures</span></span>
+              <span class="chip"><span class="zh-block">${c.concepts.length} 節</span><span class="en en-block">${c.concepts.length} sections</span></span>
+              <span class="chip"><span class="zh-block">${c.sims.length} 互動圖</span><span class="en en-block">${c.sims.length} figures</span></span>
             </div>
             <p class="lede zh-block">${esc(c.intro.zh)}</p>
             <p class="lede-en en-block">${esc(c.intro.en)}</p>
@@ -265,10 +265,10 @@
               ${prev ? `<a href="#/c/${prev.id}"><span class="lab">← 上一章</span><span class="ttl">${esc(prev.title.zh)}</span></a>` : '<a class="disabled"><span class="lab">← 上一章</span></a>'}
               ${next ? `<a class="next" href="#/c/${next.id}"><span class="lab">下一章 →</span><span class="ttl">${esc(next.title.zh)}</span></a>` : '<a class="disabled next"><span class="lab">下一章 →</span></a>'}
             </div>
-            <p class="note-line">本页的图为教学模型，参数与数值可在右侧调整。所有计算即时进行，不依赖网络。教材单元标注为教学对照，非官方。</p>
+            <p class="note-line">本頁的圖為教學模型，參數與數值可在右側調整。所有計算即時進行，不依賴網絡。教材單元標註為教學對照，非官方。</p>
           </article>
 
-          <aside class="figure-panel" id="panel" aria-label="互动图">
+          <aside class="figure-panel" id="panel" aria-label="互動圖">
             <div class="fig-tabs" id="figTabs" role="tablist"></div>
             <div id="figHost"></div>
           </aside>
@@ -325,16 +325,16 @@
     if (!hostEl) return;
     const spec = c.sims[i];
     const factory = P.sims[spec.type];
-    if (!factory) { hostEl.innerHTML = '<p class="loading">图表未载入 · figure unavailable</p>'; return; }
+    if (!factory) { hostEl.innerHTML = '<p class="loading">圖表未載入 · figure unavailable</p>'; return; }
     const is3d = !!P.SIMS_3D[spec.type];
     if (is3d && !window.THREE) {
-      hostEl.innerHTML = '<p class="loading">三维引擎未载入 · 3D engine unavailable</p>';
+      hostEl.innerHTML = '<p class="loading">三維引擎未載入 · 3D engine unavailable</p>';
       return;
     }
     const host = P[is3d ? 'SimHostGL' : 'SimHost'](hostEl, {
       aspect: is3d ? 0.72 : 0.70,
       badge: (i + 1) + ' / ' + c.sims.length,
-      label: (is3d ? '立体互动图：' : '互动图：') + spec.label.zh + ' / ' + spec.label.en + '（' + c.title.zh + '）'
+      label: (is3d ? '立體互動圖：' : '互動圖：') + spec.label.zh + ' / ' + spec.label.en + '（' + c.title.zh + '）'
     });
     let api = null;
     try { api = factory(host, spec.cfg || {}); } catch (err) { console.error('[sim]', spec.type, err); }
@@ -384,10 +384,10 @@
     const el = document.createElement('div');
     el.className = 'drawer-wrap';
     el.innerHTML = `<div class="drawer-scrim" data-drawer-close hidden></div>
-      <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="章节目录" aria-hidden="true">
+      <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="章節目錄" aria-hidden="true">
         <div class="drawer-head">
-          <div><b>目录</b><span>Contents</span></div>
-          <button class="icon-btn" type="button" data-drawer-close aria-label="关闭目录">✕</button>
+          <div><b>目錄</b><span>Contents</span></div>
+          <button class="icon-btn" type="button" data-drawer-close aria-label="關閉目錄">✕</button>
         </div>
         <div class="drawer-body" id="drawerBody">
           ${group('初中 · Junior', junior)}
@@ -417,7 +417,7 @@
       c.concepts.map((k, i) => `<a class="dsec" href="#s-${c.id}-${i}" data-anchor="s-${c.id}-${i}">
         <span class="dn">${String(i + 1).padStart(2, '0')}</span><span class="dt">${esc(k.t.zh)}</span>
       </a>`).join('') +
-      `<a class="dsec" href="#terms-${c.id}" data-anchor="terms-${c.id}"><span class="dn">§</span><span class="dt">术语与练习</span></a>`;
+      `<a class="dsec" href="#terms-${c.id}" data-anchor="terms-${c.id}"><span class="dn">§</span><span class="dt">術語與練習</span></a>`;
   }
 
   function openDrawer() {

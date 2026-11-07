@@ -71,7 +71,7 @@
       const done = visited.indexOf(c.id) >= 0;
       const title = c.title.zh.length > 11 ? c.title.zh.slice(0, 11) + '…' : c.title.zh;
       const sub = m.unit || '';
-      const label = `第 ${+c.no} 章 ${c.title.zh} · ${c.title.en}${done ? ' · 已读' : ''}`;
+      const label = `第 ${+c.no} 章 ${c.title.zh} · ${c.title.en}${done ? ' · 已讀' : ''}`;
       nodes += `<a class="mnode ${track}${done ? ' done' : ''}" href="#/c/${c.id}" data-id="${c.id}" data-req="${(m.requires || []).join(' ')}" aria-label="${ESC(label)}">
         <rect x="${p.x}" y="${p.y}" width="${nodeW}" height="${NODE_H}" rx="7"/>
         <text class="mno" x="${p.x + 11}" y="${p.y + 15}">${ESC(c.no)}</text>
@@ -81,7 +81,7 @@
       </a>`;
     });
 
-    const svg = `<svg class="map-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="group" aria-label="${track === 'junior' ? '初中物理学习地图' : '高中物理学习地图'}">
+    const svg = `<svg class="map-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="group" aria-label="${track === 'junior' ? '初中物理學習地圖' : '高中物理學習地圖'}">
       <g class="medges">${edges}</g>
       <g class="mnodes">${nodes}</g>
     </svg>`;

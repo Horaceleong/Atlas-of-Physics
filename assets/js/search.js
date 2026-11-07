@@ -61,7 +61,7 @@
     return ESC(text.slice(0, i)) + '<mark>' + ESC(text.slice(i, i + q.length)) + '</mark>' + ESC(text.slice(i + q.length));
   }
 
-  const TYPE = { chapter: '章', concept: '节', term: '术语' };
+  const TYPE = { chapter: '章', concept: '節', term: '術語' };
 
   let dom = null, sel = 0, current = [];
 
@@ -72,17 +72,17 @@
     wrap.hidden = true;
     wrap.innerHTML = `
       <div class="palette-scrim" data-close></div>
-      <div class="palette-box" role="dialog" aria-modal="true" aria-label="搜索章节、知识点与术语">
+      <div class="palette-box" role="dialog" aria-modal="true" aria-label="搜索章節、知識點與術語">
         <div class="palette-input">
           <span class="pi-ico" aria-hidden="true">⌕</span>
-          <input type="search" id="palInput" placeholder="搜索章节、知识点、术语…" autocomplete="off" spellcheck="false"
+          <input type="search" id="palInput" placeholder="搜索章節、知識點、術語…" autocomplete="off" spellcheck="false"
                  aria-controls="palList" aria-autocomplete="list">
-          <button type="button" class="pi-esc" data-close aria-label="关闭搜索">Esc</button>
+          <button type="button" class="pi-esc" data-close aria-label="關閉搜索">Esc</button>
         </div>
-        <div class="palette-list" id="palList" role="listbox" aria-label="搜索结果"></div>
+        <div class="palette-list" id="palList" role="listbox" aria-label="搜索結果"></div>
         <div class="palette-foot">
           <span class="pstat" aria-live="polite"></span>
-          <span><kbd>↑</kbd><kbd>↓</kbd> 选择 · <kbd>↵</kbd> 打开 · <kbd>Esc</kbd> 关闭</span>
+          <span><kbd>↑</kbd><kbd>↓</kbd> 選擇 · <kbd>↵</kbd> 打開 · <kbd>Esc</kbd> 關閉</span>
         </div>
       </div>`;
     document.body.appendChild(wrap);
@@ -123,13 +123,13 @@
       current = search(q);
       sel = 0;
       if (!q.trim()) {
-        list.innerHTML = '<div class="pal-empty">输入关键词：<em>牛顿</em>、<em>lens</em>、<em>浮力</em>、<em>pV=nRT</em>…</div>';
+        list.innerHTML = '<div class="pal-empty">輸入關鍵詞：<em>牛頓</em>、<em>lens</em>、<em>浮力</em>、<em>pV=nRT</em>…</div>';
         stat.textContent = '';
         return;
       }
       if (!current.length) {
-        list.innerHTML = '<div class="pal-empty">没有匹配项 · No results</div>';
-        stat.textContent = '0 项';
+        list.innerHTML = '<div class="pal-empty">沒有匹配項 · No results</div>';
+        stat.textContent = '0 項';
         return;
       }
       list.innerHTML = current.map((it, i) => `<a class="pal-item" id="pal-${i}" data-i="${i}" role="option" aria-selected="false" href="${it.href}">
@@ -140,7 +140,7 @@
         </span>
         <span class="parrow" aria-hidden="true">↵</span>
       </a>`).join('');
-      stat.textContent = current.length + ' 项';
+      stat.textContent = current.length + ' 項';
       paint();
     }
 

@@ -82,8 +82,8 @@
     stage.className = 'fig-stage fig-stage-3d';
     const canvas = document.createElement('canvas');
     canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', opts.label || '立体互动物理图 · interactive 3D physics figure');
-    canvas.textContent = opts.label || '立体互动物理图';
+    canvas.setAttribute('aria-label', opts.label || '立體互動物理圖 · interactive 3D physics figure');
+    canvas.textContent = opts.label || '立體互動物理圖';
     const overlay = document.createElement('canvas');
     overlay.className = 'fig-overlay';
     overlay.setAttribute('aria-hidden', 'true');
@@ -92,7 +92,7 @@
     if (opts.badge) badge.textContent = opts.badge;
     const hint = document.createElement('div');
     hint.className = 'fig-hint';
-    hint.innerHTML = opts.hint || '拖动旋转 · 滚轮缩放 · 右键平移';
+    hint.innerHTML = opts.hint || '拖動旋轉 · 滾輪縮放 · 右鍵平移';
     stage.appendChild(canvas);
     stage.appendChild(overlay);
     if (opts.badge) stage.appendChild(badge);
